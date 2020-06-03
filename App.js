@@ -1,19 +1,36 @@
 import React from 'react';
-import { Text, View, SafeAreaView, Platform, StatusBar } from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView, Platform } from 'react-native';
 import Constants from 'expo-constants';
 
 const App = () => {
-  const { statusBarHeight } = Constants;
-
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <View
-        style={Platform.OS !== 'ios' ? { paddingTop: statusBarHeight } : {}}
+        style={[
+          styles.container,
+          Platform.OS !== 'ios' && styles.androidContainer,
+        ]}
       >
-        <Text>Why no work</Text>
+        <Text>☹️👉📱</Text>
       </View>
     </SafeAreaView>
   );
 };
 
 export default App;
+
+const { statusBarHeight } = Constants;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    backgroundColor: 'pink',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  androidContainer: {
+    marginTop: statusBarHeight,
+  },
+});
