@@ -1,19 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View, SafeAreaView, Platform, StatusBar } from 'react-native';
+import Constants from 'expo-constants';
 
-export default function App() {
+const App = () => {
+  const { statusBarHeight } = Constants;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <SafeAreaView>
+      <View
+        style={Platform.OS !== 'ios' ? { paddingTop: statusBarHeight } : {}}
+      >
+        <Text>Why no work</Text>
+      </View>
+    </SafeAreaView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
