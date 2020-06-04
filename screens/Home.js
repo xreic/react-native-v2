@@ -1,12 +1,13 @@
 // Dependencies
 import React, { useState, useCallback, useEffect } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, RefreshControl } from 'react-native';
 
 // Components
 import PalettePreview from '../components/PalettePreview';
 
 const Home = ({ navigation }) => {
   const [colorPalettes, setColorPalettes] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const handleFetch = useCallback(async () => {
     const results = await fetch(
@@ -18,6 +19,14 @@ const Home = ({ navigation }) => {
       setColorPalettes(palettes);
     }
   });
+
+  const handleRefresh = useCallback(async () => {
+    setIsRefreshing(true);
+    await handleFetch();
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     handleFetch();
@@ -38,6 +47,8 @@ const Home = ({ navigation }) => {
           />
         </View>
       )}
+      refreshing={isRefreshing}
+      onRefresh={handleRefresh}
     />
   );
 };
