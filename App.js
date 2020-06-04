@@ -8,14 +8,14 @@ import ColorBox from './components/ColorBox';
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.topFlex}>
+    <SafeAreaView>
       <View
         style={[
           styles.container,
           Platform.OS !== 'ios' && styles.androidContainer,
         ]}
       >
-        <Text style={styles.textHeader}>
+        <Text style={styles.heading}>
           Here are some boxes of different colors
         </Text>
         <ColorBox colorName={'Cyan'} hexCode={'#2aa198'} />
@@ -32,22 +32,23 @@ export default App;
 const { statusBarHeight } = Constants;
 
 const styles = StyleSheet.create({
-  topFlex: {
-    flex: 1,
-  },
-
   container: {
-    flex: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingTop: 50,
+    paddingHorizontal: 10,
   },
 
   androidContainer: {
-    marginTop: statusBarHeight,
+    paddingTop: statusBarHeight,
   },
 
-  textHeader: {
+  heading: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 10,
+  },
+
+  text: {
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
