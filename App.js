@@ -1,6 +1,10 @@
+// Dependencies
 import React from 'react';
 import { Text, View, StyleSheet, SafeAreaView, Platform } from 'react-native';
 import Constants from 'expo-constants';
+
+// React
+import ColorBox from './components/ColorBox';
 
 const App = () => {
   return (
@@ -14,12 +18,10 @@ const App = () => {
         <Text style={styles.textHeader}>
           Here are some boxes of different colors
         </Text>
-        <View style={styles.colorsContainer}>
-          <Text style={[styles.colors, styles.cyan]}>Cyan #2aa198</Text>
-          <Text style={[styles.colors, styles.blue]}>Blue #268bd2</Text>
-          <Text style={[styles.colors, styles.magenta]}>Magenta #d33682</Text>
-          <Text style={[styles.colors, styles.orange]}>Orange #cb4b16</Text>
-        </View>
+        <ColorBox colorName={'Cyan'} hexCode={'#2aa198'} />
+        <ColorBox colorName={'Blue'} hexCode={'#268bd2'} />
+        <ColorBox colorName={'Magenta'} hexCode={'#d33682'} />
+        <ColorBox colorName={'Orange'} hexCode={'#cb4b16'} />
       </View>
     </SafeAreaView>
   );
@@ -47,33 +49,5 @@ const styles = StyleSheet.create({
   textHeader: {
     fontSize: 18,
     fontWeight: 'bold',
-  },
-
-  colorsContainer: {
-    flex: 1,
-    alignItems: 'stretch',
-  },
-
-  colors: {
-    marginVertical: 5,
-    padding: 5,
-    color: 'white',
-    textAlign: 'center',
-  },
-
-  cyan: {
-    backgroundColor: '#2aa198',
-  },
-
-  blue: {
-    backgroundColor: '#268bd2',
-  },
-
-  magenta: {
-    backgroundColor: '#d33682',
-  },
-
-  orange: {
-    backgroundColor: '#cb4b16',
   },
 });
