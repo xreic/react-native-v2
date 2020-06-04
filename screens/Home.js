@@ -1,6 +1,9 @@
 // Dependencies
 import React from 'react';
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
+
+// Components
+import PalettePreview from '../components/PalettePreview';
 
 // Helpers
 import COLOR_PALETTES from '../utils/colors';
@@ -8,17 +11,17 @@ import COLOR_PALETTES from '../utils/colors';
 const Home = ({ navigation }) => {
   return (
     <FlatList
+      style={styles.list}
       data={COLOR_PALETTES}
       keyExtractor={(item) => item.paletteName}
       renderItem={({ item }) => (
         <View>
-          <TouchableOpacity
-            onPress={() => {
+          <PalettePreview
+            handlePress={() => {
               navigation.navigate('ColorPalette', item);
             }}
-          >
-            <Text>{item.paletteName}</Text>
-          </TouchableOpacity>
+            colorPalette={item}
+          />
         </View>
       )}
     />
@@ -26,3 +29,10 @@ const Home = ({ navigation }) => {
 };
 
 export default Home;
+
+const styles = StyleSheet.create({
+  list: {
+    padding: 10,
+    backgroundColor: 'white',
+  },
+});
