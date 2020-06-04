@@ -1,28 +1,53 @@
 // Dependencies
 import React from 'react';
-import { Text, View, StyleSheet, SafeAreaView, Platform } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  SafeAreaView,
+  Platform,
+  FlatList,
+} from 'react-native';
 import Constants from 'expo-constants';
 
-// React
+// Components
 import ColorBox from './components/ColorBox';
+
+// Helpers
+const COLORS = [
+  { colorName: 'Base03', hexCode: '#002b36' },
+  { colorName: 'Base02', hexCode: '#073642' },
+  { colorName: 'Base01', hexCode: '#586e75' },
+  { colorName: 'Base00', hexCode: '#657b83' },
+  { colorName: 'Base0', hexCode: '#839496' },
+  { colorName: 'Base1', hexCode: '#93a1a1' },
+  { colorName: 'Base2', hexCode: '#eee8d5' },
+  { colorName: 'Base3', hexCode: '#fdf6e3' },
+  { colorName: 'Yellow', hexCode: '#b58900' },
+  { colorName: 'Orange', hexCode: '#cb4b16' },
+  { colorName: 'Red', hexCode: '#dc322f' },
+  { colorName: 'Magenta', hexCode: '#d33682' },
+  { colorName: 'Violet', hexCode: '#6c71c4' },
+  { colorName: 'Blue', hexCode: '#268bd2' },
+  { colorName: 'Cyan', hexCode: '#2aa198' },
+  { colorName: 'Green', hexCode: '#859900' },
+];
 
 const App = () => {
   return (
     <SafeAreaView>
-      <View
+      <FlatList
         style={[
           styles.container,
           Platform.OS !== 'ios' && styles.androidContainer,
         ]}
-      >
-        <Text style={styles.heading}>
-          Here are some boxes of different colors
-        </Text>
-        <ColorBox colorName={'Cyan'} hexCode={'#2aa198'} />
-        <ColorBox colorName={'Blue'} hexCode={'#268bd2'} />
-        <ColorBox colorName={'Magenta'} hexCode={'#d33682'} />
-        <ColorBox colorName={'Orange'} hexCode={'#cb4b16'} />
-      </View>
+        data={COLORS}
+        keyExtractor={(item) => item.hexCode}
+        renderItem={({ item }) => (
+          <ColorBox colorName={item.colorName} hexCode={item.hexCode} />
+        )}
+        ListHeaderComponent={<Text style={styles.heading}>Solarized</Text>}
+      />
     </SafeAreaView>
   );
 };
@@ -35,6 +60,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
     paddingHorizontal: 10,
+    paddingBottom: 10,
   },
 
   androidContainer: {
@@ -46,9 +72,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
-
-  text: {
-    fontWeight: 'bold',
-    color: 'white',
-  },
 });
+
+/**
+ * If there is a key property in the data
+ * Then keyExtractor is not required within the FlatList
+ */
+const COLORS_NoKeyExtractor = [
+  { colorName: 'Base03', hexCode: '#002b36', key: '1' },
+];
