@@ -1,4 +1,4 @@
-export const COLORS = [
+const COLORS = [
   { colorName: 'Base03', hexCode: '#002b36' },
   { colorName: 'Base02', hexCode: '#073642' },
   { colorName: 'Base01', hexCode: '#586e75' },
@@ -17,7 +17,7 @@ export const COLORS = [
   { colorName: 'Green', hexCode: '#859900' },
 ];
 
-export const RAINBOW = [
+const RAINBOW = [
   { colorName: 'Red', hexCode: '#FF0000' },
   { colorName: 'Orange', hexCode: '#FF7F00' },
   { colorName: 'Yellow', hexCode: '#FFFF00' },
@@ -25,10 +25,18 @@ export const RAINBOW = [
   { colorName: 'Violet', hexCode: '#8B00FF' },
 ];
 
-export const FRONTEND_MASTERS = [
+const FRONTEND_MASTERS = [
   { colorName: 'Red', hexCode: '#c02d28' },
   { colorName: 'Black', hexCode: '#3e3e3e' },
   { colorName: 'Grey', hexCode: '#8a8a8a' },
   { colorName: 'White', hexCode: '#ffffff' },
   { colorName: 'Orange', hexCode: '#e66225' },
 ];
+
+const COLOR_PALETTES = [
+  { paletteName: 'Solarized', colors: COLORS },
+  { paletteName: 'Frontend Masters', colors: FRONTEND_MASTERS },
+  { paletteName: 'Rainbow', colors: RAINBOW },
+];
+
+export default COLOR_PALETTES;
