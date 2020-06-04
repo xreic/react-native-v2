@@ -7,8 +7,8 @@ import {
   SafeAreaView,
   Platform,
   FlatList,
+  StatusBar,
 } from 'react-native';
-import Constants from 'expo-constants';
 
 // Components
 import ColorBox from './components/ColorBox';
@@ -35,36 +35,38 @@ const COLORS = [
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <FlatList
-        style={[
-          styles.container,
-          Platform.OS !== 'ios' && styles.androidContainer,
-        ]}
-        data={COLORS}
-        keyExtractor={(item) => item.hexCode}
-        renderItem={({ item }) => (
-          <ColorBox colorName={item.colorName} hexCode={item.hexCode} />
-        )}
-        ListHeaderComponent={<Text style={styles.heading}>Solarized</Text>}
-      />
-    </SafeAreaView>
+    <React.Fragment>
+      {Platform.OS !== 'ios' && <StatusBar backgroundColor="black" />}
+      <SafeAreaView style={styles.viewArea}>
+        <FlatList
+          style={[
+            styles.container,
+            Platform.OS !== 'ios' && styles.androidContainer,
+          ]}
+          data={COLORS}
+          keyExtractor={(item) => item.hexCode}
+          renderItem={({ item }) => (
+            <ColorBox colorName={item.colorName} hexCode={item.hexCode} />
+          )}
+          ListHeaderComponent={<Text style={styles.heading}>Solarized</Text>}
+        />
+      </SafeAreaView>
+    </React.Fragment>
   );
 };
 
 export default App;
 
-const { statusBarHeight } = Constants;
-
 const styles = StyleSheet.create({
+  viewArea: {
+    flex: 1,
+  },
+
   container: {
+    flex: 1,
     paddingTop: 50,
     paddingHorizontal: 10,
     paddingBottom: 10,
-  },
-
-  androidContainer: {
-    paddingTop: statusBarHeight,
   },
 
   heading: {
