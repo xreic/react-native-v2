@@ -36,7 +36,7 @@ const ColorPaletteModal = () => {
     } else if (Object.keys(selectedColors).length < 3) {
       Alert.alert('Palette must have at least three (3) colors');
     } else {
-      
+      // Do something
     }
   };
 
