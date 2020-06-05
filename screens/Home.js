@@ -54,7 +54,7 @@ const Home = ({ navigation }) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('ColorPaletteModal')}
         >
-          <Text>Launch Modal</Text>
+          <Text style={styles.modalHeader}>Launch Modal</Text>
         </TouchableOpacity>
       }
     />
@@ -67,5 +67,11 @@ const styles = StyleSheet.create({
   list: {
     padding: 10,
     backgroundColor: 'white',
+  },
+  modalHeader: {
+    color: 'darkgreen',
+    fontWeight: 'bold',
+    fontSize: 24,
+    marginBottom: 10,
   },
 });
