@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   modalHeader: {
-    color: 'darkgreen',
+    color: '#2aa198',
     fontWeight: 'bold',
     fontSize: 24,
     marginBottom: 10,
