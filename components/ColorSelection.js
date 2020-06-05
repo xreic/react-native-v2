@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, Switch } from 'react-native';
 
-const ColorSelection = ({ colorName, isSelected, handleSwitch }) => {
+const ColorSelection = ({ colorName, hexCode, isSelected, handleSwitch }) => {
   return (
     <View style={styles.selection}>
       <Text>{colorName}</Text>
       <Switch
-        onValueChange={() => handleSwitch(colorName)}
-        value={!!isSelected}
+        onValueChange={() => handleSwitch(isSelected, { colorName, hexCode })}
+        value={isSelected}
       />
     </View>
   );

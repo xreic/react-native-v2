@@ -6,9 +6,13 @@ import { Text, View, FlatList, StyleSheet } from 'react-native';
 import PalettePreview from '../components/PalettePreview';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, route }) => {
   const [colorPalettes, setColorPalettes] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const newColorPalette = route.params
+    ? route.params.newColorPalette
+    : undefined;
 
   const handleFetch = useCallback(async () => {
     const results = await fetch(
@@ -33,6 +37,12 @@ const Home = ({ navigation }) => {
     handleFetch();
   }, []);
 
+  useEffect(() => {
+    if (newColorPalette) {
+      setColorPalettes((palettes) => [newColorPalette, ...palettes]);
+    }
+  }, [newColorPalette]);
+
   return (
     <FlatList
       style={styles.list}
@@ -54,7 +64,7 @@ const Home = ({ navigation }) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('ColorPaletteModal')}
         >
-          <Text style={styles.modalHeader}>Launch Modal</Text>
+          <Text style={styles.modalHeader}>Add a new palette</Text>
         </TouchableOpacity>
       }
     />

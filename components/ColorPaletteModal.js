@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   View,
   Text,
@@ -14,15 +14,19 @@ import {
 import { COLORS } from '../utils/colors';
 import ColorSelection from './ColorSelection';
 
-const ColorPaletteModal = () => {
+const ColorPaletteModal = ({ navigation }) => {
   const [inputValue, setInputValue] = useState('');
-  const [selectedColors, setSelectedColors] = useState({});
+  const [selectedColors, setSelectedColors] = useState([]);
 
-  const handleSwitch = (colorName) => {
-    if (selectedColors[colorName]) {
-      setSelectedColors(Object.assign({}, selectedColors, { [colorName]: 0 }));
+  const handleSwitch = (value, color) => {
+    if (value === false) {
+      setSelectedColors((colors) => [...colors, color]);
     } else {
-      setSelectedColors(Object.assign({}, selectedColors, { [colorName]: 1 }));
+      setSelectedColors((colors) =>
+        colors.filter(
+          (selectedColor) => selectedColor.colorName !== color.colorName,
+        ),
+      );
     }
   };
 
@@ -36,7 +40,12 @@ const ColorPaletteModal = () => {
     } else if (Object.keys(selectedColors).length < 3) {
       Alert.alert('Palette must have at least three (3) colors');
     } else {
-      // Do something
+      const newColorPalette = {
+        paletteName: inputValue,
+        colors: selectedColors,
+      };
+
+      navigation.navigate('Home', { newColorPalette });
     }
   };
 
@@ -51,7 +60,12 @@ const ColorPaletteModal = () => {
         renderItem={({ item }) => (
           <ColorSelection
             colorName={item.colorName}
-            isSelected={selectedColors[item.colorName]}
+            hexCode={item.hexCode}
+            isSelected={
+              !!selectedColors.find(
+                (color) => color.colorName === item.colorName,
+              )
+            }
             handleSwitch={handleSwitch}
           />
         )}
